@@ -1,0 +1,7 @@
+#!/bin/sh
+cd "$(dirname $0)/.."
+
+bin/build
+
+vercel --prod
+vercel rm todomvc --safe --yes

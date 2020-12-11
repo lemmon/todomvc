@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    ".vercel": true
+  },
+  "search.exclude": {
+    "develop": true,
+    "develop/index.html": true,
+    "public/index.html": true
+  }
+}

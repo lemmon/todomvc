@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+const fs = require('fs').promises
+const path = require('path')
+const rollup = require('rollup')
+const abrusco = require('abrusco-cli')
+const PurgeCSS = require('purgecss').PurgeCSS
+
+const inputConfig = require('../rollup.production')
+const inputFile = path.resolve(__dirname, '../develop/index.html')
+const outputFile = path.resolve(__dirname, '../public/index.html')
+
+async function processCSS(inputCSS, html) {
+  return (
+    Promise.resolve(inputCSS)
+      // build
+      .then((code) =>
+        abrusco(code, {
+          from: undefined,
+          minify: true,
+        }).then((x) => x.css)
+      )
+      // purge
+      .then((code) =>
+        new PurgeCSS()
+          .purge({
+            content: [{ raw: html, extension: 'html' }],
+            css: [{ raw: code }],
+            defaultExtractor: (content) =>
+              content.match(/[\w-/:]+(?<!:)/g) || [],
+            // variables: true,
+          })
+          .then((x) => x[0].css)
+      )
+  )
+}
+
+async function main() {
+  // read input file
+  await fs
+    .readFile(inputFile, 'utf8')
+    .then((html) =>
+      // remove whitespace
+      html.replace(/^\s+/gm, '').replace(/\n+/g, '')
+    )
+    .then((html) =>
+      // process JS
+      rollup
+        .rollup(inputConfig)
+        .then((x) => x.generate({ format: 'iife' }))
+        .then((x) => x.output[0].code)
+        .then((x) =>
+          html.replace(
+            /<script src="[^"]+bundle.js"><\/script>/g,
+            `<script>${x.trim()}</script>`
+          )
+        )
+    )
+    .then((html) =>
+      // process CSS
+      fs
+        .readFile(path.resolve(__dirname, '../src/css/index.css'), 'utf8')
+        .then((x) => processCSS(x, html))
+        .then((x) =>
+          html.replace(
+            /<link rel="stylesheet" href="[^"]+bundle\.css"\s*\/?>/g,
+            `<style>${x}</style>`
+          )
+        )
+    )
+    .then((x) => fs.writeFile(outputFile, x, 'utf8'))
+}
+
+main().then(() => {
+  console.log('index.html processed')
+})
