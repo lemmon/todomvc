@@ -86,7 +86,7 @@ function parsePath(pathname, rootPath) {
   return [path, ...path.split('/').slice(1)]
 }
 
-function parseQuery(loc) {
+function parseQuery(location) {
   return Array.from(new URL(location).searchParams.entries()).reduce(
     (acc, curr) =>
       Object.assign(acc, {
