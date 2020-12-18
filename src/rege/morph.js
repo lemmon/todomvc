@@ -63,6 +63,14 @@ function morphAttrs(fromNode, toNode) {
       }
     }
   }
+
+  // Variables
+  const fromNodeKeys = Object.keys(fromNode).filter(
+    (x) => x.charAt(0) !== '$' && x !== 'render' && !x.match(/^\d+$/)
+  )
+  fromNodeKeys.forEach((key) => {
+    fromNode[key] = toNode[key]
+  })
 }
 
 const NS_XHTML = 'http://www.w3.org/1999/xhtml'
