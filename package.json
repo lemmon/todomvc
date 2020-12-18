@@ -6,7 +6,8 @@
     "@rollup/plugin-inject": "^4.0.2",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "abrusco": "^0.14.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "w:app": "rollup --config rollup.develop.js --watch",

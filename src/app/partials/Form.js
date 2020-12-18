@@ -1,7 +1,9 @@
+import { v4 as uuid } from 'uuid'
+
 export default () => (
   <div>
     <form method="post" onsubmit={handleSubmit}>
-      <input name="taskName" type="text" />
+      <input type="text" name="taskName" />
       <button type="submit">Add</button>
     </form>
   </div>
@@ -14,6 +16,6 @@ function handleSubmit(e) {
   const value = input.value
   input.value = ''
   if (!value) return
-  app.state.tasks.push(value)
+  app.state.tasks.push({ id: uuid(), name: value })
   app.render()
 }

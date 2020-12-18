@@ -6,8 +6,8 @@ export default (node, props, ...children) => {
     typeof node === 'string'
       ? document.createElement(node)
       : node.prototype
-      ? document.createElement(customTagName(node))
-      : node($props)
+      ? Object.assign(document.createElement(customTagName(node)), { $props })
+      : node($props, app.state)
   if (!el) return
   // class
   if ($class) {
@@ -30,7 +30,7 @@ export default (node, props, ...children) => {
         el[key] = val
       } else if (typeof val === 'boolean') {
         el.toggleAttribute(key, val)
-      } else if (typeof val === 'string' || typeof val === 'number') {
+      } else {
         el.setAttribute(key, val)
       }
     })

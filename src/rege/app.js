@@ -74,6 +74,10 @@ app.mount = (App, target) => {
 // render
 app.render = () => {
   morph(app.target, app.App(app), {
+    getNodeKey: (node) => {
+      if (node.nodeType !== 1) return
+      return node.getAttribute('key') || node.getAttribute('id') || node.id
+    },
     onBeforeElChildrenUpdated: (fromEl) => !fromEl.update || fromEl.update(),
   })
 }

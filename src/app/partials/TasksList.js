@@ -1,3 +1,5 @@
+import TaskItem from '../components/TaskItem'
+
 const renderEmpty = () => (
   <div>
     <p class="lh4 black-60">No tasks.</p>
@@ -8,9 +10,7 @@ const renderTasks = ({ tasks }) => (
   <div>
     <ul>
       {tasks.map((task) => (
-        <li class="lh4">
-          <span class="black-20">&rarr;</span> {task}
-        </li>
+        <TaskItem key={task.id} $task={task} />
       ))}
     </ul>
   </div>

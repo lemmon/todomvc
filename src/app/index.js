@@ -6,6 +6,7 @@ window.log = (...args) => {
 }
 
 app.setState({
+  tick: 0,
   tasks: [],
 })
 app.mount(App, '#app')
