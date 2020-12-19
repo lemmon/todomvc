@@ -71,16 +71,20 @@ app.mount = (App, target) => {
   app.render()
 }
 
-// render
-app.render = () => {
-  morph(app.target, app.App(app), {
+// morph
+app.morph = (fromNode, toNode, options = {}) =>
+  morph(fromNode, toNode, {
     getNodeKey: (node) => {
       if (node.nodeType !== 1) return
       return node.getAttribute('key') || node.getAttribute('id') || node.id
     },
-    onBeforeElChildrenUpdated: (fromEl) => !fromEl.update || fromEl.update(),
+    onBeforeElChildrenUpdated: (fromEl) =>
+      !fromEl.update || fromEl.update() !== false,
+    ...options,
   })
-}
+
+// render
+app.render = () => app.morph(app.target, app.App(app))
 
 function parsePath(pathname, rootPath) {
   const path =

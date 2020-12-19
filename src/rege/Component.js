@@ -1,5 +1,4 @@
 import createElement from './createElement'
-import morph from './morph'
 
 export default class extends HTMLElement {
   constructor() {
@@ -13,7 +12,7 @@ export default class extends HTMLElement {
       const _root = this.root
       const _render = this.render
       this.render = () => {
-        morph(
+        app.morph(
           _root,
           createElement(
             'div',
