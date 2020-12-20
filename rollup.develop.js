@@ -14,6 +14,8 @@ export default {
     babel({
       babelHelpers: 'bundled',
       plugins: [
+        '@babel/plugin-proposal-class-properties',
+        '@babel/plugin-proposal-private-methods',
         ['@babel/plugin-transform-react-jsx', { pragma: 'createElement' }],
       ],
     }),

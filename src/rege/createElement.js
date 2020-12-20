@@ -30,7 +30,7 @@ export default (node, props, ...children) => {
         el[key] = val
       } else if (typeof val === 'boolean') {
         el.toggleAttribute(key, val)
-      } else {
+      } else if (val && typeof val !== 'object') {
         el.setAttribute(key, val)
       }
     })

@@ -65,10 +65,8 @@ function morphAttrs(fromNode, toNode) {
   }
 
   // Variables
-  const fromNodeKeys = Object.keys(fromNode).filter(
-    (x) => x.charAt(0) !== '$' && x !== 'render' && !x.match(/^\d+$/)
-  )
-  fromNodeKeys.forEach((key) => {
+  Object.keys(fromNode).forEach((key) => {
+    if (!Object.getOwnPropertyDescriptor(fromNode, key).writable) return
     fromNode[key] = toNode[key]
   })
 }

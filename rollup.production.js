@@ -7,11 +7,13 @@ const terser = require('rollup-plugin-terser')
 module.exports = {
   input: path.resolve('src/app/index.js'),
   plugins: [
-    resolve,
+    resolve.nodeResolve(),
     babel.babel({
       babelHelpers: 'bundled',
       presets: ['@babel/preset-env'],
       plugins: [
+        '@babel/plugin-proposal-class-properties',
+        '@babel/plugin-proposal-private-methods',
         ['@babel/plugin-transform-react-jsx', { pragma: 'createElement' }],
       ],
     }),
