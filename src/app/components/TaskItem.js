@@ -1,4 +1,5 @@
 import Component from '../../rege/Component'
+import Checkbox from './Checkbox'
 
 export default class extends Component {
   get initialState() {
@@ -8,6 +9,13 @@ export default class extends Component {
   render({ task }) {
     return (
       <li class="lh4">
+        <Checkbox
+          checked={task.completed}
+          oninput={({ target }) => {
+            task.completed = target.checked
+            this.render()
+          }}
+        />
         <span class={task.completed ? 'lt color-black-40' : ''}>
           {task.name}
         </span>{' '}

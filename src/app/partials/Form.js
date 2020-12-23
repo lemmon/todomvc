@@ -14,6 +14,6 @@ function handleSubmit(e) {
   const value = input.value.trim()
   input.value = ''
   if (!value) return
-  app.state.tasks.push({ id: uuid(), name: value })
+  app.state.tasks.push({ id: uuid(), completed: false, name: value })
   app.render()
 }
