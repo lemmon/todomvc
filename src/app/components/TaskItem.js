@@ -5,16 +5,18 @@ export default class extends Component {
     return {}
   }
 
-  render() {
+  render({ task }) {
     return (
       <li class="lh4">
-        <span class="black-20">&rarr;</span> {this.task.name}{' '}
+        <span class={task.completed ? 'lt color-black-40' : ''}>
+          {task.name}
+        </span>{' '}
         <a
           class="ul"
           href="#"
           onclick={(e) => {
             e.preventDefault()
-            log(this.task)
+            log(task)
           }}
         >
           click

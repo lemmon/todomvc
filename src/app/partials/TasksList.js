@@ -7,13 +7,18 @@ const renderEmpty = () => (
 )
 
 const renderTasks = ({ tasks }) => (
-  <div>
-    <ul>
-      {tasks.map((task) => (
-        <TaskItem key={task.id} $task={task} />
-      ))}
-    </ul>
-  </div>
+  <ul>
+    {tasks.map((task) => (
+      <TaskItem
+        key={task.id}
+        task={task}
+        ondelete={() => {
+          tasks.splice(tasks.indexOf(task), 1)
+          app.render()
+        }}
+      />
+    ))}
+  </ul>
 )
 
 export default ({ tasks }) =>
