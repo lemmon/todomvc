@@ -18,7 +18,16 @@ export default class extends Component {
           }}
         >
           click
-        </a>
+        </a>{' '}
+        <button
+          onclick={() => {
+            this.dispatchEvent(
+              new Event('delete', { bubbles: true, cancelable: false })
+            )
+          }}
+        >
+          delete
+        </button>
       </li>
     )
   }

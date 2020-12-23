@@ -27,7 +27,7 @@ export default (node, props, ...children) => {
       if (key.charAt(0) === '$') {
         el[key.substr(1)] = val
       } else if (key.substr(0, 2) === 'on') {
-        el[key] = val
+        el.addEventListener(key.substr(2), val)
       } else if (typeof val === 'boolean') {
         el.toggleAttribute(key, val)
       } else if (val && typeof val !== 'object') {
