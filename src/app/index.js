@@ -8,5 +8,6 @@ window.log = (...args) => {
 app.setState({
   tick: 0,
   tasks: [],
+  filter: 0,
 })
 app.mount(App, '#app')

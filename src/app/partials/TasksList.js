@@ -1,25 +1,24 @@
 import TaskItem from '../components/TaskItem'
 
-const renderEmpty = () => (
-  <div>
-    <p class="lh4 black-60">No tasks.</p>
-  </div>
-)
+export default ({ model, filter }) => {
+  const entries = model.filter(filter)
 
-const renderTasks = ({ tasks }) => (
-  <ul>
-    {tasks.map((task) => (
-      <TaskItem
-        key={task.id}
-        task={task}
-        ondelete={() => {
-          tasks.splice(tasks.indexOf(task), 1)
-          app.render()
-        }}
-      />
-    ))}
-  </ul>
-)
+  if (entries.length === 0) return
 
-export default ({ tasks }) =>
-  tasks.length ? renderTasks({ tasks }) : renderEmpty()
+  return (
+    <ul>
+      {entries.map((task) => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          ondelete={() => {
+            model.splice(model.indexOf(task), 1)
+          }}
+          onchange={() => {
+            app.render()
+          }}
+        />
+      ))}
+    </ul>
+  )
+}

@@ -42,5 +42,8 @@ export default class extends Component {
     this.toggleAttribute('checked', this.$state.checked)
     this.render()
     this.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }))
+    this.dispatchEvent(
+      new Event('change', { bubbles: true, cancelable: false })
+    )
   }
 }

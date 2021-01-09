@@ -34,6 +34,9 @@ export default class extends Component {
             this.dispatchEvent(
               new Event('delete', { bubbles: true, cancelable: false })
             )
+            this.dispatchEvent(
+              new Event('change', { bubbles: true, cancelable: false })
+            )
           }}
         >
           delete
