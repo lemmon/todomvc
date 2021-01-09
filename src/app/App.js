@@ -57,22 +57,36 @@ export default ({ state }) => (
         filter={filters[state.filter][1]}
       />
       {state.tasks.length > 0 && (
-        <div class="row">
-          <div class="p05">
-            {renderActiveCount(state.tasks.filter($filters.ACTIVE).length)}
+        <div>
+          <div class="row">
+            <div class="p05">
+              {renderActiveCount(state.tasks.filter($filters.ACTIVE).length)}
+            </div>
+            <div class="p05">
+              {filters.map(([label], index) => (
+                <button
+                  class={index === state.filter ? 'bold' : ''}
+                  onclick={() => {
+                    app.setState({ filter: index })
+                    app.render()
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
           <div class="p05">
-            {filters.map(([label], index) => (
-              <button
-                class={index === state.filter ? 'bold' : ''}
-                onclick={() => {
-                  app.setState({ filter: index })
-                  app.render()
-                }}
-              >
-                {label}
-              </button>
-            ))}
+            <button
+              onclick={() => {
+                app.setState({
+                  tasks: state.tasks.filter((x) => !x.completed),
+                })
+                app.render()
+              }}
+            >
+              Clear completed
+            </button>
           </div>
         </div>
       )}
