@@ -19,16 +19,6 @@ export default class extends Component {
         <span class={task.completed ? 'lt color-black-40' : ''}>
           {task.name}
         </span>{' '}
-        <a
-          class="ul"
-          href="#"
-          onclick={(e) => {
-            e.preventDefault()
-            log(task)
-          }}
-        >
-          click
-        </a>{' '}
         <button
           onclick={() => {
             this.dispatchEvent(

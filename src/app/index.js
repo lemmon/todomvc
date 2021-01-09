@@ -6,7 +6,6 @@ window.log = (...args) => {
 }
 
 app.setState({
-  tick: 0,
   tasks: [],
   filter: 0,
 })
