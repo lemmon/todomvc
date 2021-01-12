@@ -37,6 +37,7 @@ export default class extends HTMLElement {
   connectedCallback() {
     this.setState(this.$props.initialState)
     this.connected()
+    if (!this.render) return
     this.render()
   }
 
