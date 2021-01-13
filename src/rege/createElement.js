@@ -1,6 +1,6 @@
 export default (node, props, ...children) => {
   // props
-  const { $ref, class: $class, style: $style, ...$props } = props || {}
+  const { class: $class, style: $style, ...$props } = props || {}
   // create element
   const el =
     typeof node === 'string'
@@ -34,10 +34,6 @@ export default (node, props, ...children) => {
         el.setAttribute(key, val)
       }
     })
-  }
-  // ref
-  if ($ref) {
-    $ref(el)
   }
   // children
   children.flat().forEach((child) => {
