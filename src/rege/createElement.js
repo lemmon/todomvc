@@ -30,7 +30,7 @@ export default (node, props, ...children) => {
         el.addEventListener(key.substr(2), val)
       } else if (typeof val === 'boolean') {
         el.toggleAttribute(key, val)
-      } else if (val && typeof val !== 'object') {
+      } else if (val && typeof val !== 'object' && typeof val !== 'function') {
         el.setAttribute(key, val)
       }
     })
