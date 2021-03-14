@@ -1,5 +1,8 @@
 import path from 'path'
 import resolve from '@rollup/plugin-node-resolve'
+import postcss from 'rollup-plugin-postcss'
+import postcssImport from 'postcss-import'
+import postcssPresetEnv from 'postcss-preset-env'
 import babel from '@rollup/plugin-babel'
 import inject from '@rollup/plugin-inject'
 import terser from 'rollup-plugin-terser'
@@ -14,6 +17,16 @@ export default {
   },
   plugins: [
     resolve(),
+    postcss({
+      extract: path.resolve('public/bundle.css'),
+      minimize: production,
+      plugins: [
+        postcssImport(),
+        postcssPresetEnv({
+          stage: 0,
+        }),
+      ],
+    }),
     babel({
       babelHelpers: 'bundled',
       plugins: [

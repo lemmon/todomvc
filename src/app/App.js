@@ -1,3 +1,4 @@
+import '../css/index.css'
 import app from '../rege/app'
 import Form from './partials/Form'
 import TasksList from './partials/TasksList'
