@@ -12,7 +12,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "w:app": "rollup --config rollup.develop.js --watch",
+    "w:app": "rollup -c -w",
     "w:css": "abrusco src/css -o public/bundle.css --watch",
     "w": "npm run w:app & npm run w:css"
   }

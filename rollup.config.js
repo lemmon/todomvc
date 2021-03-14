@@ -1,16 +1,21 @@
-const path = require('path')
-const resolve = require('@rollup/plugin-node-resolve')
-const babel = require('@rollup/plugin-babel')
-const inject = require('@rollup/plugin-inject')
-const terser = require('rollup-plugin-terser')
+import path from 'path'
+import resolve from '@rollup/plugin-node-resolve'
+import babel from '@rollup/plugin-babel'
+import inject from '@rollup/plugin-inject'
+import terser from 'rollup-plugin-terser'
 
-module.exports = {
-  input: path.resolve('src/app/index.js'),
+const production = !process.env.ROLLUP_WATCH
+
+export default {
+  input: 'src/app/index.js',
+  output: {
+    file: 'public/bundle.js',
+    format: 'iife',
+  },
   plugins: [
-    resolve.nodeResolve(),
-    babel.babel({
+    resolve(),
+    babel({
       babelHelpers: 'bundled',
-      presets: ['@babel/preset-env'],
       plugins: [
         '@babel/plugin-proposal-class-properties',
         '@babel/plugin-proposal-private-methods',
@@ -21,7 +26,7 @@ module.exports = {
       app: path.resolve('src/rege/app.js'),
       createElement: path.resolve('src/rege/createElement.js'),
     }),
-    terser.terser({
+    production && terser.terser({
       output: {
         comments: false,
       },
