@@ -6,7 +6,7 @@ import inject from '@rollup/plugin-inject'
 export default {
   input: 'src/app/index.js',
   output: {
-    file: 'develop/build/bundle.js',
+    file: 'public/bundle.js',
     format: 'iife',
   },
   plugins: [

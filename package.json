@@ -13,7 +13,7 @@
   },
   "scripts": {
     "w:app": "rollup --config rollup.develop.js --watch",
-    "w:css": "abrusco src/css -o develop/build/bundle.css --watch",
+    "w:css": "abrusco src/css -o public/bundle.css --watch",
     "w": "npm run w:app & npm run w:css"
   }
 }
